@@ -1,18 +1,30 @@
 exports.handler = async (event) => {
-    // TODO implement
-    const path = event.path;
-    const method = event.method;
-    let response;
-    if(path === "/hello" && method === "GET"){
-        response = {
+    const path = event.rawPath; 
+    const method = event.requestContext.http.method; 
+ 
+    if (path === "/hello" && method === "GET") {
+        return {
             "statusCode": 200,
-            "message": "Hello from Lambda",
-        }
-    }else{
-        response = {
-            "statusCode": 400,
-            "message": `Bad request syntax or unsupported method. Request path: ${path}. HTTP method: ${method}`
-        }
+            "body": {
+              "statusCode": 200,
+              "message": "Hello from Lambda"
+            },
+            "headers": {
+              "content-type": "application/json"
+            },
+            "isBase64Encoded": false
+          }
     }
-    return response;
+ 
+    return {
+        "statusCode": 400,
+        "body": {
+          "statusCode": 400,
+          "message": `Bad request syntax or unsupported method. Request path: ${path}. HTTP method: ${method}`
+        },
+        "headers": {
+          "content-type": "application/json"
+        },
+        "isBase64Encoded": false
+      }
 };
