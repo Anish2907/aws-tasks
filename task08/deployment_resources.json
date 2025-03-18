@@ -26,13 +26,7 @@
     "resource_type": "iam_policy",
     "tags": {}
   },
-  "uuid_trigger": {
-    "resource_type": "cloudwatch_rule",
-    "rule_type": "schedule",
-    "tags": {},
-    "expression": "rate(1 minute)"
-  },
-  "${target_bucket}":{
+  "${target_bucket}": {
     "resource_type": "s3_bucket",
     "acl": "private",
     "cors": [],
@@ -44,5 +38,11 @@
       "restrict_public_buckets": true
     },
     "tags": {}
+  },
+  "uuid_trigger": {
+    "resource_type": "cloudwatch_rule",
+    "rule_type": "schedule",
+    "tags": {},
+    "expression": "rate(1 minute)"
   }
 }
